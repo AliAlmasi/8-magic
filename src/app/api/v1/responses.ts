@@ -1,4 +1,5 @@
 import { answerObject, Err } from "@/data/types";
+import { errorCodeToText } from "./headers";
 
 /**
  *
@@ -6,9 +7,10 @@ import { answerObject, Err } from "@/data/types";
  * @returns {string} JSON string response containing details about error.
  */
 export function errorJSON(error: unknown): string {
-	const { type, message, cause } = error as Err;
+	const { type, message, cause, code } = error as Err;
 	return JSON.stringify({
 		status: "fail",
+		"why?": `${code} ${errorCodeToText(code ?? undefined)}`,
 		type,
 		message: message || "An unknown error occurred",
 		cause

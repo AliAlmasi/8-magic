@@ -41,7 +41,19 @@ export function randomAnswer(reqType?: string): answerObject {
 	}
 }
 
+/**
+ *
+ * @param {number | string} id Used to select the specified answer object with this `id`
+ * @returns {answerObject} ID-specified answer object
+ */
 export function getAnswerByID(id: number | string): answerObject {
-	if (typeof id === "string") id = Number(id);
-	return allAnswers.filter((answer) => answer.id == id)[0];
+	if (typeof id === "string" && !isNaN(Number(id))) id = Number(id);
+	if (!isNaN(Number(id)))
+		return allAnswers.filter((answer) => answer.id == id)[0];
+	else
+		throw new Err({
+			type: "REQ_ERR",
+			message: `\`id\` (${id.toString()}) is NaN.`,
+			cause: "getAnswerByID() on /src/utils/randomAnswer.ts"
+		});
 }

@@ -3,6 +3,7 @@ import { failOptions, successOptions } from "@/app/api/v1/headers";
 import { errorJSON } from "@/app/api/v1/responses";
 import { getTypeAnswers } from "@/app/api/v1/functions";
 import { getTypeLength } from "@/data/answers";
+import { answerType, answerTypes, Err } from "@/data/types";
 
 /**
  *
@@ -21,6 +22,18 @@ export async function GET(req: NextRequest): Promise<Response> {
 			Number(new URL(req.url).searchParams.get("n")?.trim()) ||
 			0;
 
+		if (
+			(type as answerType) !== answerTypes.positive &&
+			(type as answerType) !== answerTypes.neutral &&
+			(type as answerType) !== answerTypes.negative &&
+			(type as answerType) !== answerTypes.all
+		)
+			throw new Err({
+				type: "REQ_ERR",
+				message: "Requested type is invaild.",
+				code: 400
+			});
+
 		return new Response(
 			JSON.stringify({
 				status: "success",
@@ -33,6 +46,6 @@ export async function GET(req: NextRequest): Promise<Response> {
 			successOptions("Got the answers")
 		);
 	} catch (error: unknown) {
-		return new Response(errorJSON(error), failOptions());
+		return new Response(errorJSON(error), failOptions((error as Err)?.code));
 	}
 }

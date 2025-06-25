@@ -5,7 +5,7 @@ export const headers = (contentType: string): strObject => {
 		throw new Err({
 			type: "SERV_ERR",
 			message: "Content-Type not defined correctly in HTTP response headers.",
-			cause: "headers() on /utils/headers.ts"
+			cause: "headers() on /src/app/api/v1/headers.ts"
 		});
 	}
 	return {
@@ -14,6 +14,30 @@ export const headers = (contentType: string): strObject => {
 		Pragma: "no-cache",
 		Expires: "0"
 	};
+};
+
+export const errorCodeToText = (code?: number): string => {
+	if (code !== undefined)
+		switch (code) {
+			case 400:
+				return "Terrible request";
+			case 404:
+				return "Where is it?";
+			case 406:
+				return "No, I don't want this";
+			case 418:
+				return "Um...";
+			case 500:
+				return "I am the problem";
+			default:
+				throw new Err({
+					type: "SERV_ERR",
+					message: "Input parameter `code` is not expected.",
+					cause: "errorStatusCodeToText() on /src/app/api/v1/headers.ts",
+					code: 500
+				});
+		}
+	else return "";
 };
 
 export const successOptions = (
@@ -30,12 +54,11 @@ export const successOptions = (
 
 export const failOptions = (
 	code: number = 500,
-	message: string = "Server Error",
 	contentType: string = "application/json"
 ): httpOptionsObject => {
 	return {
 		status: code,
-		statusText: message,
+		statusText: errorCodeToText(code),
 		headers: headers(contentType)
 	};
 };

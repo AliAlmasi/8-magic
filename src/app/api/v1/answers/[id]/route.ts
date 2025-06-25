@@ -21,7 +21,7 @@ export async function GET(
 		if (isNaN(id))
 			throw new Err({
 				type: "REQ_ERR",
-				message: "Input is not a valid ID.",
+				message: `Requested ID (${id}) is not a valid ID.`,
 				code: 400
 			});
 		if (allAnswers[id - 1] === undefined)
@@ -30,14 +30,11 @@ export async function GET(
 				message: `Requested ID (${id}) does not exist.`,
 				code: 400
 			});
-		return new Response(getAnswerJSON(getAnswerByID(id)), successOptions());
-	} catch (error: unknown) {
 		return new Response(
-			errorJSON(error),
-			failOptions(
-				(error as Err).code,
-				(error as Err).code === 400 ? "Bad Request" : undefined
-			)
+			getAnswerJSON(getAnswerByID(id)),
+			successOptions("Here's your answer")
 		);
+	} catch (error: unknown) {
+		return new Response(errorJSON(error), failOptions((error as Err)?.code));
 	}
 }

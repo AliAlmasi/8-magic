@@ -3,10 +3,10 @@ import allAnswers, {
 	neutralAnswers,
 	positiveAnswers
 } from "@/data/answers";
-import { answersArray, Err } from "@/data/types";
+import { answersArray, answerTypes, Err } from "@/data/types";
 
 function getAllAnswers(arr: answersArray, n: number): answersArray {
-	if (n === 0) return arr;
+	if (n === 0 || !n) return arr;
 	else {
 		const shuffled: answersArray = arr.slice();
 
@@ -26,16 +26,13 @@ function getAllAnswers(arr: answersArray, n: number): answersArray {
 
 export function getTypeAnswers(type: string, n: number): answersArray {
 	switch (type) {
-		case "👍":
-		case "positive":
+		case answerTypes.positive:
 			return getAllAnswers(positiveAnswers, n);
-		case "🤷":
-		case "neutral":
+		case answerTypes.neutral:
 			return getAllAnswers(neutralAnswers, n);
-		case "👎":
-		case "negative":
+		case answerTypes.negative:
 			return getAllAnswers(negativeAnswers, n);
-		case "all":
+		case answerTypes.all:
 			return getAllAnswers(allAnswers, n);
 		default:
 			throw new Err({

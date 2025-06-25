@@ -1,9 +1,21 @@
-export type answerTypes = "positive" | "neutral" | "negative";
+export type answerType = "positive" | "neutral" | "negative" | "all";
+
+export const answerTypes: {
+	positive: answerType;
+	neutral: answerType;
+	negative: answerType;
+	all: answerType;
+} = Object.freeze({
+	positive: "positive",
+	neutral: "neutral",
+	negative: "negative",
+	all: "all"
+});
 
 export type answerObject = {
 	id: number;
 	answer: string;
-	type: answerTypes;
+	type: typeof answerTypes;
 	emoji: string;
 };
 
@@ -19,11 +31,13 @@ export type httpOptionsObject = {
 
 type ErrorType = "SERV_ERR" | "REQ_ERR" | "UNKNOWN_ERR";
 
+type ErrorCodes = 400 | 404 | 406 | 418 | 500;
+
 export class Err extends Error {
 	type: ErrorType;
 	message: string;
 	cause?: string;
-	code?: number;
+	code?: ErrorCodes;
 
 	constructor({
 		type,
@@ -34,7 +48,7 @@ export class Err extends Error {
 		type: ErrorType;
 		message: string;
 		cause?: string;
-		code?: number;
+		code?: ErrorCodes;
 	}) {
 		super();
 		this.type = type;
