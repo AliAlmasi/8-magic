@@ -1,3 +1,5 @@
+import { SpeedInsights } from "@vercel/speed-insights/next";
+
 import { Metadata } from "next";
 import "./globals.css";
 import { bebas } from "@/app/fonts";
@@ -15,6 +17,7 @@ export default async function RootLayout({
 		<html lang="en" className="w-full h-full">
 			<body className={`${bebas.className} antialiased w-full h-full`}>
 				{children}
+				<SpeedInsights />
 			</body>
 		</html>
 	);
