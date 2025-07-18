@@ -27,7 +27,7 @@ export async function GET() {
 		(
 			<div
 				style={{
-					backgroundColor: "#fafafa",
+					backgroundColor: "#eeeded",
 					display: "flex",
 					flexDirection: "column",
 					justifyContent: "center",
@@ -35,18 +35,19 @@ export async function GET() {
 					width: "1200px",
 					height: "630px",
 					fontFamily: "Bebas Neue",
-					fontSize: 30,
-					lineHeight: 1
+					fontSize: 50,
+					lineHeight: 0.5,
+					color: "#222"
 				}}
 			>
 				<div style={{ display: "flex", alignItems: "center" }}>
 					<Logo
 						style={{
-							width: 150,
-							height: 150
+							width: 180,
+							height: 180
 						}}
 					/>
-					<h1 style={{ fontSize: 100 }}>{"-Magic"}</h1>
+					<h1 style={{ fontSize: 140 }}>{"-Magic"}</h1>
 				</div>
 				<p>A clairvoyant piece of application</p>
 			</div>
