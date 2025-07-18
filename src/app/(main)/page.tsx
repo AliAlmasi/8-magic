@@ -1,13 +1,18 @@
 "use client";
 
-import { mono } from "@/app/fonts";
-
 import { useState } from "react";
-import Ball from "@/app/components/Ball";
 import { randomAnswer } from "@/utils/randomAnswer";
+import { mono } from "@/app/fonts";
+import Ball from "@/app/components/Ball";
 import Button from "@/app/components/Button";
-import { newtab } from "@/app/functions";
-import Link from "next/link";
+
+function newtab(href: string): void {
+	const a: HTMLAnchorElement = document.createElement("a");
+	a.href = href;
+	a.setAttribute("target", "_blank");
+	a.click();
+	a.remove();
+}
 
 export default function Home() {
 	const [isClicked, setIsClicked] = useState(false);
