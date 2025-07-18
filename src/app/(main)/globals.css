@@ -9,6 +9,7 @@
 	--color-background: var(--background);
 	--color-foreground: var(--foreground);
 	--font-sans: var(--font-bebas);
+	--font-mono: var(--font-jetbrains);
 }
 
 @media (prefers-color-scheme: dark) {

@@ -15,7 +15,7 @@ export const answerTypes: {
 export type answerObject = {
 	id: number;
 	answer: string;
-	type: typeof answerTypes;
+	type: answerType;
 	emoji: string;
 };
 

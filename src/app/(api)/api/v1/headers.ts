@@ -16,7 +16,8 @@ export const headers = (contentType: string): strObject => {
 	};
 };
 
-export const errorCodeToText = (code?: number): string => {
+export const errorCodeToText = (code?: number | string): string => {
+	if (typeof code === "string") code = parseInt(code);
 	if (code !== undefined)
 		switch (code) {
 			case 400:
@@ -28,12 +29,12 @@ export const errorCodeToText = (code?: number): string => {
 			case 418:
 				return "Um...";
 			case 500:
-				return "I am the problem";
+				return "Skyler, I am the problem!";
 			default:
 				throw new Err({
 					type: "SERV_ERR",
-					message: "Input parameter `code` is not expected.",
-					cause: "errorStatusCodeToText() on /src/app/api/v1/headers.ts",
+					message: "Parameter `code` is not valid.",
+					cause: "errorCodeToText() on /src/app/api/v1/headers.ts",
 					code: 500
 				});
 		}
