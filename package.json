@@ -1,7 +1,7 @@
 {
   "name": "8-magic",
   "author": "Ali Almasi",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
