@@ -15,7 +15,12 @@ export const metadata: Metadata = {
 		description: "A clairvoyant piece of application",
 		siteName: "8-Magic",
 		images: [
-			{ url: "https://8.alialmasi.ir/api/ogp", width: 1200, height: 630 }
+			{
+				// url: "https://8.alialmasi.ir/api/ogp",
+				url: "https://8-magic.vercel.app/api/ogp",
+				width: 1200,
+				height: 630
+			}
 		]
 	}
 };
