@@ -5,7 +5,19 @@ import "./globals.css";
 import { bebas } from "@/app/fonts";
 
 export const metadata: Metadata = {
-	title: "8-Magic"
+	title: "8-Magic",
+	authors: { name: "Ali Almasi", url: "https://alialmasi.ir" },
+	description: "A clairvoyant piece of application",
+	openGraph: {
+		type: "website",
+		url: "https://8.alialmasi.ir",
+		title: "8-Magic",
+		description: "A clairvoyant piece of application",
+		siteName: "8-Magic",
+		images: [
+			{ url: "https://8.alialmasi.ir/api/ogp", width: 1200, height: 630 }
+		]
+	}
 };
 
 export default async function RootLayout({
